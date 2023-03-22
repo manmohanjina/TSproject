@@ -8,17 +8,24 @@ import ActionButton from "@/shared/ActionBtn";
 type props = {
   selectedPage: SelectedPage;
   setSelectedPage: (value: SelectedPage) => void;
+  isTopOfPage: boolean;
 };
 
-export default function Navbar({ selectedPage, setSelectedPage }: props) {
+export default function Navbar({
+  selectedPage,
+  setSelectedPage,
+  isTopOfPage,
+}: props) {
   const flexBetween = "flex items-center justify-between";
   const isAboveMediumScreen = useMediaQuery("(min-width: 1060px)");
 
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
 
+  const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
+
   return (
     <nav>
-      <div className={`${flexBetween} fixed top-0 z-30 w-full py-6 `}>
+      <div className={` ${navbarBackground} ${flexBetween} fixed top-0 z-30 w-full py-6 `}>
         <div className={`${flexBetween} mx-auto w-5/6 `}>
           <div className={`${flexBetween}  w-full gap-16 `}>
             {/* leftSide */}
@@ -78,6 +85,28 @@ export default function Navbar({ selectedPage, setSelectedPage }: props) {
             </button>
           </div>
           {/* menu items */}
+          <div className={"ml-[33%] flex flex-col gap-10 text-2xl  "}>
+            <Link
+              page="Home"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <Link
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+              page="Contact"
+            />
+            <Link
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+              page="Our Classes"
+            />
+            <Link
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+              page="Contact us "
+            />
+          </div>
         </div>
       )}
     </nav>
